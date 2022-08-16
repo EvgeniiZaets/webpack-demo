@@ -20,4 +20,12 @@ let conf = {
 	}
 }
 
-module.exports = conf;
+module.exports = (env, options) => {
+	let isProduction = options.mode === 'production';
+
+	conf.devtool = isProduction
+		? 'source-map' // set "false" if you want to disable sourcemap on production
+		: 'eval-sourcemap';
+
+	return conf;
+};
