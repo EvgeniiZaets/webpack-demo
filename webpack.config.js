@@ -5,10 +5,15 @@ let conf = {
 	output: {
 		path: path.resolve(__dirname, './dist'),
 		filename: 'main.js',
-		publicPath: 'dist/'
+		publicPath: '/dist/'
 	},
 	devServer: {
-		overlay: true
+		static: {
+			directory: path.join(__dirname, '/'),
+		},
+		client: {
+			overlay: true,
+		}
 	},
 	module: {
 		rules: [
@@ -29,7 +34,7 @@ module.exports = (env, options) => {
 
 	conf.devtool = isProduction
 		? 'source-map' // set "false" if you want to disable sourcemap on production
-		: 'eval-sourcemap';
+		: 'eval-cheap-module-source-map';
 
 	return conf;
 };
